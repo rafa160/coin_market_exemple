@@ -49,9 +49,6 @@ class _HomeScreenState extends State<HomeScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                SizedBox(
-                  height: 40,
-                ),
                 FutureBuilder(
                     future: coinBloc.fetch(),
                     builder: (context, snapshot) {
