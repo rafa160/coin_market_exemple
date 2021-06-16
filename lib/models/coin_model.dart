@@ -22,8 +22,8 @@ class CoinModel {
     slug: json["slug"],
     rank: json["rank"],
     isActive: json["is_active"],
-    firstHistoricalData: DateTime.parse(json["first_historical_data"]),
-    lastHistoricalData: DateTime.parse(json["last_historical_data"]),
+    firstHistoricalData: json["first_historical_data"] == null ? null : DateTime.parse(json["first_historical_data"]),
+    lastHistoricalData: json["last_historical_data"] == null ? null : DateTime.parse(json["last_historical_data"]),
     platformModel: json["platform"] != null ? new PlatformModel.fromJson(json["platform"]) : null,
   );
 
