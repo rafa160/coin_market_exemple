@@ -1,5 +1,10 @@
+import 'package:coin_market/blocs/coin_bloc.dart';
+import 'package:coin_market/components/custom_circular_progress_indicator.dart';
+import 'package:coin_market/components/custom_info_card.dart';
+import 'package:coin_market/components/custom_reload_button.dart';
 import 'package:coin_market/helpers/style.dart';
 import 'package:coin_market/helpers/utils.dart';
+import 'package:coin_market/models/coin_model.dart';
 import 'package:coin_market/screens/home/home_module.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -35,6 +40,77 @@ class _HomeScreenState extends State<HomeScreen> {
           title: Text(
             name,
             style: homeScreenTitle,
+          ),
+        ),
+        body: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.only(top: 20, left: 20, right: 20),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                SizedBox(
+                  height: 40,
+                ),
+                FutureBuilder(
+                    future: coinBloc.fetch(),
+                    builder: (context, snapshot) {
+                      switch (snapshot.connectionState) {
+                        case ConnectionState.waiting:
+                        case ConnectionState.none:
+                          return CustomCircularProgressIndicator();
+                        default:
+                          if (!snapshot.hasData || snapshot.hasError) {
+                            return Center(
+                                child: Column(
+                                   children: [
+                                    Text('Sorry something went wrong'),
+                                    CustomButton(
+                                      text: 'reload',
+                                      onPressed: () async {
+                                        Get.offAll(() => HomeModule());
+                                  },
+                                ),
+                              ],
+                            ));
+                          }
+                          return Container(
+                            color: Colors.white,
+                            height: ScreenUtil.screenHeight,
+                            child: RefreshIndicator(
+                              onRefresh: refresh,
+                              backgroundColor: Colors.black,
+                              color: Colors.white,
+                              child: GridView.builder(
+                                      padding: EdgeInsets.all(2),
+                                      shrinkWrap: true,
+                                      itemCount: coinBloc.coins.length,
+                                      gridDelegate:
+                                      SliverGridDelegateWithFixedCrossAxisCount(
+                                        crossAxisCount: 4,
+                                        mainAxisSpacing: 8,
+                                        crossAxisSpacing: 8,
+                                        childAspectRatio: 2 / 2.6,
+                                      ),
+                                      itemBuilder: (BuildContext context, int index) {
+                                        CoinModel coin = snapshot.data[index];
+                                        return GestureDetector(
+                                          onTap: () async {
+                                            // Get.to(() => CoinDetailsModule(coinModel: coin,));
+                                          },
+                                          child: CustomInfoCard(
+                                            titleOne: coin.name,
+                                            titleTwo: coin.symbol,
+                                          ),
+                                        );
+                                      }
+                                  ),
+                            ),
+                          );
+                      }
+                    }
+                ),
+              ],
+            ),
           ),
         ),
       ),
