@@ -6,7 +6,7 @@ class AppWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-      title: 'WindMill App',
+      title: 'Coin Market App',
       theme: ThemeData(fontFamily: 'Nunito'),
       debugShowCheckedModeBanner: false,
       home: SplashModule(),
