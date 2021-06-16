@@ -1,3 +1,4 @@
+import 'package:coin_market/components/logo_container.dart';
 import 'package:coin_market/screens/home/home_module.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -15,6 +16,9 @@ class _SplashScreenState extends State<SplashScreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            LogoContainer(
+              tag: 'logo',
+            ),
           ],
         ),
       ),
