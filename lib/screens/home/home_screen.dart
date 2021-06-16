@@ -5,6 +5,7 @@ import 'package:coin_market/components/custom_reload_button.dart';
 import 'package:coin_market/helpers/style.dart';
 import 'package:coin_market/helpers/utils.dart';
 import 'package:coin_market/models/coin_model.dart';
+import 'package:coin_market/screens/coin_details/coin_details_module.dart';
 import 'package:coin_market/screens/home/home_module.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -95,7 +96,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                         CoinModel coin = snapshot.data[index];
                                         return GestureDetector(
                                           onTap: () async {
-                                            // Get.to(() => CoinDetailsModule(coinModel: coin,));
+                                            Get.to(() => CoinDetailsModule(coinModel: coin,));
                                           },
                                           child: CustomInfoCard(
                                             titleOne: coin.name,
