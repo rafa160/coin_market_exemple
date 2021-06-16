@@ -1,6 +1,8 @@
+import 'package:coin_market/blocs/fav_bloc.dart';
 import 'package:coin_market/components/custom_plataform_container.dart';
 import 'package:coin_market/helpers/style.dart';
 import 'package:coin_market/models/coin_model.dart';
+import 'package:coin_market/screens/coin_details/coin_details_module.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -15,6 +17,8 @@ class CoinDetailsScreen extends StatefulWidget {
 }
 
 class _CoinDetailsScreenState extends State<CoinDetailsScreen> {
+
+  var favBloc = CoinDetailsModule.to.getBloc<FavoriteBloc>();
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -49,12 +53,26 @@ class _CoinDetailsScreenState extends State<CoinDetailsScreen> {
                   SizedBox(
                     height: 40,
                   ),
-                  RichText(
-                    text: TextSpan(children: <TextSpan>[
-                      TextSpan(
-                          text: '${widget.coinModel.name} - ${widget.coinModel.symbol}',
-                          style: infoDetailsScreen),
-                    ]),
+                  Row(
+                    children: [
+                      RichText(
+                        text: TextSpan(children: <TextSpan>[
+                          TextSpan(
+                              text: '${widget.coinModel.name} - ${widget.coinModel.symbol}',
+                              style: infoDetailsScreen),
+                        ]),
+                      ),
+                      Spacer(),
+                      GestureDetector(
+                        onTap: () async {
+                          favBloc.toggleAsFavorite(widget.coinModel);
+                        },
+                        child: Icon(
+                          Icons.favorite_border,
+                          color: Colors.deepPurpleAccent,
+                        ),
+                      ),
+                    ],
                   ),
                   SizedBox(
                     height: 10,
