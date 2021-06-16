@@ -1,11 +1,12 @@
 
 
+import 'package:coin_market/models/coin_model.dart';
+import 'package:coin_market/services/coin_service.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 import 'package:rxdart/rxdart.dart';
-import 'package:windmill_test_app/models/coin_model.dart';
-import 'package:windmill_test_app/services/coin_service.dart';
+
 
 class MockApiCallService extends Mock implements CoinService {}
 
