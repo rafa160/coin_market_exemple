@@ -1,3 +1,4 @@
+import 'package:coin_market/screens/home/home_module.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
