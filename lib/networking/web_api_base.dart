@@ -19,7 +19,7 @@ abstract class WebApiBase {
   }) async {
     try {
       Map<String, String> headers = {
-        ///passar headers da requisicao
+        ///if I decided to use the headers I pass it for here
         'Content-type': 'application/json',
         'Accept': 'application/json'
       };
